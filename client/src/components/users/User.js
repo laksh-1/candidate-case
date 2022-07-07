@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { FaBackward } from "react-icons/fa";
 import axios from "axios";
 
 const User = () => {
@@ -21,7 +22,7 @@ const User = () => {
   return (
     <div className="container py-4">
       <Link className="btn btn-primary" to="/">
-        back to Home
+        <FaBackward />
       </Link>
       <h1 className="display-4">User Id: {id}</h1>
       <hr />

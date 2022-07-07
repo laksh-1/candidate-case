@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { FaEye, FaPen, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -46,20 +47,20 @@ const Home = () => {
                     className="btn btn-primary mr-2"
                     to={`/users/${user.id}`}
                   >
-                    View
+                    <FaEye />
                   </Link>
                   <Link
                     className="btn btn-outline-primary mr-2"
                     to={`/users/edit/${user.id}`}
                   >
-                    Edit
+                    <FaPen />
                   </Link>
                   <Link
                     className="btn btn-danger"
                     onClick={() => deleteUser(user.id)}
                     to="/"
                   >
-                    Delete
+                    <FaTrash />
                   </Link>
                 </td>
               </tr>
