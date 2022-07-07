@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { FaEye, FaPen, FaTrash } from "react-icons/fa";
+import { FaEye, FaPen, FaTrash, FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -24,7 +24,17 @@ const Home = () => {
   return (
     <div className="container">
       <div className="py-4">
-        <h1>Home Page</h1>
+        <div class="d-flex justify-content-between">
+          <div>
+            <h1>Employee List</h1>
+          </div>
+          <div>
+            <Link className="btn btn-light btn-outline-dark" to="/users/add">
+              Add <FaPlus />
+            </Link>
+          </div>
+        </div>
+
         <table className="table border shadow">
           <thead className="thead-dark">
             <tr>
@@ -44,19 +54,19 @@ const Home = () => {
                 <td>{user.email}</td>
                 <td>
                   <Link
-                    className="btn btn-primary mr-2"
+                    className="btn btn-outline-primary mr-2"
                     to={`/users/${user.id}`}
                   >
                     <FaEye />
                   </Link>
                   <Link
-                    className="btn btn-outline-primary mr-2"
+                    className="btn btn-outline-dark mr-2"
                     to={`/users/edit/${user.id}`}
                   >
                     <FaPen />
                   </Link>
                   <Link
-                    className="btn btn-danger"
+                    className="btn btn-outline-danger"
                     onClick={() => deleteUser(user.id)}
                     to="/"
                   >
