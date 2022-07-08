@@ -8,12 +8,37 @@ const EditUser = () => {
   const [user, setUser] = useState({
     name: "",
     email: "",
+    age: "",
+    location: "",
     experience: "",
-    others: ""
+    offerInHand: "No",
+    handle: "",
+    salary: "",
+    academics: "",
+    company: "",
+    startDate: "",
+    endDate: "",
+    profile: "",
+    others: "",
   });
 
-  const { name, email, experience, others } = user;
-  const onInputChange = e => {
+  const {
+    name,
+    email,
+    experience,
+    others,
+    academics,
+    handle,
+    salary,
+    offerInHand,
+    company,
+    profile,
+    startDate,
+    endDate,
+    age,
+    location,
+  } = user;
+  const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
@@ -21,7 +46,7 @@ const EditUser = () => {
     loadUser();
   }, []);
 
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     await axios.put(`http://localhost:3004/users/${id}`, user);
     history.push("/");
@@ -37,7 +62,7 @@ const EditUser = () => {
     <div className="container">
       <div className="w-75 mx-auto shadow p-5">
         <h2 className="text-center mb-4">Edit A User</h2>
-        <form onSubmit={e => onSubmit(e)}>
+        <form onSubmit={(e) => onSubmit(e)}>
           <div className="form-group">
             <input
               type="text"
@@ -45,7 +70,37 @@ const EditUser = () => {
               placeholder="Enter Your Name"
               name="name"
               value={name}
-              onChange={e => onInputChange(e)}
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control form-control-lg"
+              placeholder="Enter Your Age"
+              name="age"
+              value={age}
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control form-control-lg"
+              placeholder="Enter Your Current Location"
+              name="location"
+              value={location}
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control form-control-lg"
+              placeholder="Enter Your Expected CTC"
+              name="salary"
+              value={salary}
+              onChange={(e) => onInputChange(e)}
             />
           </div>
           <div className="form-group">
@@ -55,30 +110,109 @@ const EditUser = () => {
               placeholder="Enter Your E-mail Address"
               name="email"
               value={email}
-              onChange={e => onInputChange(e)}
+              onChange={(e) => onInputChange(e)}
             />
           </div>
           <div className="form-group">
             <input
               type="text"
               className="form-control form-control-lg"
-              placeholder="Enter Your Phone Number"
+              placeholder="Enter Your Experience in years"
               name="experience"
               value={experience}
-              onChange={e => onInputChange(e)}
+              onChange={(e) => onInputChange(e)}
             />
           </div>
           <div className="form-group">
             <input
               type="text"
               className="form-control form-control-lg"
-              placeholder="Enter Your Phone Number"
+              placeholder="Enter your Skills"
               name="others"
               value={others}
-              onChange={e => onInputChange(e)}
+              onChange={(e) => onInputChange(e)}
             />
           </div>
-          <button className="btn btn-warning btn-block">Update User</button>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control form-control-lg"
+              placeholder="Academics"
+              name="academics"
+              value={academics}
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control form-control-lg"
+              placeholder="Enter Your LinkedIn Handle"
+              name="handle"
+              value={handle}
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-control form-control-lg">
+              Offer in hand{" "}
+            </label>
+            <select
+              name="offerInHand"
+              value={offerInHand}
+              className="form-control form-control-lg"
+              onChange={(e) => onInputChange(e)}
+            >
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control form-control-lg"
+              placeholder="Enter Your last Company"
+              name="company"
+              value={company}
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control form-control-lg"
+              placeholder="Enter Your Profile for above"
+              name="profile"
+              value={profile}
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-control form-control-lg">Start Date </label>
+            <br />
+            <input
+              type="month"
+              className="form-control form-control-lg"
+              placeholder="Academics"
+              name="startDate"
+              value={startDate}
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-control form-control-lg">End Date </label>
+
+            <input
+              type="month"
+              className="form-control form-control-lg"
+              name="endDate"
+              value={endDate}
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
+          <button className="btn btn-primary btn-block">
+            Update Candidate
+          </button>
         </form>
       </div>
     </div>

@@ -5,10 +5,10 @@ const bodyParser = require("body-parser");
 
 const app = express();
 const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "password",
-  database: "crud"
+  host: "bnhiovial5cl0u3lc6zm-mysql.services.clever-cloud.com",
+  user: "uzpj6ckvryhhrcwe",
+  password: "0BcD3NfbXbdEo3BfHaIl",
+  database: "bnhiovial5cl0u3lc6zm",
 });
 
 app.use(cors());
@@ -20,12 +20,41 @@ app.post("/users", (req, res) => {
   const email = req.body.email;
   const experience = req.body.experience;
   const others = req.body.others;
+  const academics = req.body.academics;
+  const handle = req.body.handle;
+  const offerInHand = req.body.offerInHand;
+  const company = req.body.company;
+  const profile = req.body.profile;
+  const startDate = req.body.startDate;
+  const endDate = req.body.endDate;
+  const age = req.body.age;
+  const location = req.body.location;
+  const salary = req.body.salary;
 
   const sqlInsert =
-    "INSERT INTO users (name, email, experience, others) VALUES (?,?,?,?);";
-  db.query(sqlInsert, [name, email, experience, others], (err, result) => {
-    // console.log(result);
-  });
+    "INSERT INTO users (name,email,experience,others,academics,handle,offerInHand,company,profile,startDate,endDate,age,location,salary) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+  db.query(
+    sqlInsert,
+    [
+      name,
+      email,
+      experience,
+      others,
+      academics,
+      handle,
+      offerInHand,
+      company,
+      profile,
+      startDate,
+      endDate,
+      age,
+      location,
+      salary,
+    ],
+    (err, result) => {
+      console.log("yash", result);
+    }
+  );
 });
 
 app.get("/users", (req, res) => {
@@ -39,21 +68,30 @@ app.get("/users", (req, res) => {
 app.get("/users/:id", (req, res) => {
   const sqlGet = `SELECT * FROM users WHERE id=${req.params.id};`;
   db.query(sqlGet, (err, result) => {
-    // console.log(result[0].experience);
+    // console.log(result[0]);
     res.send(result);
   });
 });
 
 app.put("/users/:id", (req, res) => {
-  const id = req.body.id;
   const name = req.body.name;
   const email = req.body.email;
   const experience = req.body.experience;
   const others = req.body.others;
+  const academics = req.body.academics;
+  const handle = req.body.handle;
+  const offerInHand = req.body.offerInHand;
+  const company = req.body.company;
+  const profile = req.body.profile;
+  const startDate = req.body.startDate;
+  const endDate = req.body.endDate;
+  const age = req.body.age;
+  const location = req.body.location;
+  const salary = req.body.salary;
 
   // console.log(req.body);
 
-  const sqlUpdate = `UPDATE users SET name = '${name}', email = '${email}', experience = '${experience}', others = '${others}' WHERE id =${id};`;
+  const sqlUpdate = `UPDATE users SET name = '${name}', email = '${email}', experience = '${experience}', others = '${others}',academics = '${academics}', handle = '${handle}', offerInHand= '${offerInHand}', company= '${company}', profile = '${profile}', startDate= '${startDate}',endDate= '${endDate}', age= '${age}',location= '${location}' ,salary='${salary}' WHERE id ='${id}'`;
   db.query(sqlUpdate, (err, result) => {
     // console.log(err);
     res.send(result);

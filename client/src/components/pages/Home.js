@@ -16,7 +16,7 @@ const Home = () => {
     setUser(result.data);
   };
 
-  const deleteUser = async id => {
+  const deleteUser = async (id) => {
     await axios.delete(`http://localhost:3004/users/${id}`);
     loadUsers();
   };
@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <div className="container">
       <div className="py-4">
-        <div class="d-flex justify-content-between">
+        <div className="d-flex justify-content-between">
           <div>
             <h1>Employee List</h1>
           </div>
@@ -40,7 +40,7 @@ const Home = () => {
             <tr>
               <th scope="col">#</th>
               <th scope="col">Name</th>
-              <th scope="col">UserName</th>
+              <th scope="col">Location</th>
               <th scope="col">Email</th>
               <th>Action</th>
             </tr>
@@ -50,7 +50,7 @@ const Home = () => {
               <tr key={user.name}>
                 <th scope="row">{index + 1}</th>
                 <td>{user.name}</td>
-                <td>{user.name}</td>
+                <td>{user.location}</td>
                 <td>{user.email}</td>
                 <td>
                   <Link

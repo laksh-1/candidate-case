@@ -19,11 +19,12 @@ const Contact = () => {
             </small>
           </div>
           <div className="form-group">
-            <label htmlFor="exampleInputPassword1">Password</label>
-            <input
-              type="password"
+            <label htmlFor="exampleInputPassword1">Query</label>
+            <textarea
+              // type="textarea"
               className="form-control"
               id="exampleInputPassword1"
+              placeholder="Enter your query"
             />
           </div>
           <div className="form-group form-check">

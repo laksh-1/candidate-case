@@ -20,7 +20,7 @@ const Navbar = () => {
       </button>
 
       <div className="collapse navbar-collapse">
-        <ul className="navbar-nav mr-auto">
+        <ul className="navbar-nav ml-auto">
           <li className="nav-item">
             <NavLink className="nav-link" exact to="/">
               Home
