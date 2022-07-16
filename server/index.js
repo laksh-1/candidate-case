@@ -14,7 +14,14 @@ const db = mysql.createPool({
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+const port = process.env.PORT || 3004;
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("build"));
+}
+app.get("/", (req, res) => {
+  res.send("server is running");
+});
 app.post("/users", (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
@@ -52,6 +59,7 @@ app.post("/users", (req, res) => {
       salary,
     ],
     (err, result) => {
+      res.send(result);
       console.log("yash", result);
     }
   );
@@ -60,7 +68,7 @@ app.post("/users", (req, res) => {
 app.get("/users", (req, res) => {
   const sqlGet = "SELECT * FROM users;";
   db.query(sqlGet, (err, result) => {
-    // console.log(result[0].experience);
+    console.log(result);
     res.send(result);
   });
 });
@@ -74,6 +82,7 @@ app.get("/users/:id", (req, res) => {
 });
 
 app.put("/users/:id", (req, res) => {
+  const id = req.params["id"];
   const name = req.body.name;
   const email = req.body.email;
   const experience = req.body.experience;
@@ -102,10 +111,11 @@ app.delete("/users/:id", (req, res) => {
   const sqlDelete = `DELETE FROM users WHERE id=${req.params.id};`;
   db.query(sqlDelete, (err, result) => {
     // console.log(result);
+    res.send(result);
     // console.log(err);
   });
 });
 
-app.listen(3004, () => {
+app.listen(port, () => {
   console.log("running on port 3004!");
 });

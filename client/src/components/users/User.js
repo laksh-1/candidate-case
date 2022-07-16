@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import { FaBackward } from "react-icons/fa";
 import axios from "axios";
 import { FaCloudDownloadAlt } from "react-icons/fa";
-const fs = require("fs");
 
 const User = () => {
   const [user, setUser] = useState({
@@ -33,21 +32,21 @@ const User = () => {
     setUser(res.data[0]);
   };
   const download = () => {
-    const filename = "Candidate_" + user.name;
+    const filename = "Candidate_" + user.name + "_" + user.id;
     var element = document.createElement("a");
-    const text1 = " Name : " + user.name;
-    const text2 = " Age : " + user.age;
-    const text3 = " Location : " + user.location;
-    const text4 = " Expected CTC : " + user.salary;
-    const text5 = " Email : " + user.email;
-    const text13 = " Skills : " + user.others;
-    const text6 = " LinkedIn  : " + user.handle;
-    const text7 = " Offer in Hand : " + user.offerInHand;
-    const text8 = " Academics : " + user.academics;
-    const text9 = " Last Company : " + user.company;
-    const text10 = " Profile : " + user.profile;
-    const text11 = " Start Date : " + user.startDate;
-    const text12 = " End Date : " + user.endDate;
+    const text1 = "\n Name : " + user.name;
+    const text2 = "\n Age : " + user.age;
+    const text3 = "\n Location : " + user.location;
+    const text4 = "\n Expected CTC : " + user.salary;
+    const text5 = "\n Email : " + user.email;
+    const text13 = "\n Skills : " + user.others;
+    const text6 = "\n LinkedIn  : " + user.handle;
+    const text7 = "\n Offer in Hand : " + user.offerInHand;
+    const text8 = "\n Academics : " + user.academics;
+    const text9 = "\n Last Company : " + user.company;
+    const text10 = "\n Profile : " + user.profile;
+    const text11 = "\n Start Date : " + user.startDate;
+    const text12 = "\n End Date : " + user.endDate;
 
     text = text.concat(
       text1,
