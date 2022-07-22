@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-
 const AddUser = () => {
   let history = useHistory();
   const [user, setUser] = useState({
@@ -14,10 +13,6 @@ const AddUser = () => {
     handle: "",
     salary: "",
     academics: "",
-    company: "",
-    startDate: "",
-    endDate: "",
-    profile: "",
     others: "",
   });
 
@@ -30,10 +25,6 @@ const AddUser = () => {
     handle,
     salary,
     offerInHand,
-    company,
-    profile,
-    startDate,
-    endDate,
     age,
     location,
   } = user;
@@ -43,9 +34,37 @@ const AddUser = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    console.log(JSON.stringify(formFields));
     await axios.post("http://localhost:3004/users", user);
+    await axios.post("http://localhost:3004/company", formFields);
+
     history.push("/");
   };
+  const [formFields, setFormFields] = useState([
+    { work: "", profile: "", startDate: "", endDate: "" },
+  ]);
+  const handleFormChange = (event, index) => {
+    let data = [...formFields];
+    data[index][event.target.name] = event.target.value;
+    setFormFields(data);
+  };
+  const addFields = () => {
+    let object = {
+      work: "",
+      startDate: "",
+      endDate: "",
+      profile: "",
+    };
+    setFormFields([...formFields, object]);
+  };
+
+  const removeFields = (index) => {
+    let data = [...formFields];
+    data.splice(index, 1);
+    setFormFields(data);
+    // console.log(index);
+  };
+
   return (
     <div className="container">
       <div className="w-75 mx-auto shadow p-5">
@@ -163,49 +182,65 @@ const AddUser = () => {
               <option value="No">No</option>
             </select>
           </div>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="Enter Your last Company"
-              name="company"
-              value={company}
-              onChange={(e) => onInputChange(e)}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="Enter Your Profile for above"
-              name="profile"
-              value={profile}
-              onChange={(e) => onInputChange(e)}
-            />
-          </div>
-          <div className="form-group">
-            <label className="form-control form-control-lg">Start Date </label>
+          <div>
+            {formFields.map((form, index) => {
+              return (
+                <form>
+                  <div key={index}>
+                    <label className="form-control form-control-lg">
+                      Work Experience : (company name){" "}
+                    </label>
+                    <input
+                      type="text"
+                      name="work"
+                      className="form-control form-control-lg"
+                      onChange={(e) => handleFormChange(e, index)}
+                      value={form.work}
+                    />
+                    <br />
+                    <label>Start date: </label>
+                    <input
+                      type="month"
+                      name="startDate"
+                      className="form-control form-control-lg"
+                      required
+                      onChange={(e) => handleFormChange(e, index)}
+                      value={form.startDate}
+                    />
+                    <br />
+                    <br />
+                    <label>End date: </label>
+                    <input
+                      type="month"
+                      name="endDate"
+                      className="form-control form-control-lg"
+                      required
+                      onChange={(e) => handleFormChange(e, index)}
+                      value={form.endDate}
+                    />
+                    <br />
+                    <label>Profile: </label>
+                    <input
+                      type="text"
+                      name="profile"
+                      className="form-control form-control-lg"
+                      onChange={(e) => handleFormChange(e, index)}
+                      value={form.profile}
+                    />
+                    <br />
+                    <button type="button" onClick={() => removeFields(index)}>
+                      Remove
+                    </button>
+                    <br />
+                    <br />
+                  </div>
+                </form>
+              );
+            })}
+            <button onClick={addFields}>Add</button>
             <br />
-            <input
-              type="month"
-              className="form-control form-control-lg"
-              placeholder="Academics"
-              name="startDate"
-              value={startDate}
-              onChange={(e) => onInputChange(e)}
-            />
           </div>
-          <div className="form-group">
-            <label className="form-control form-control-lg">End Date </label>
-
-            <input
-              type="month"
-              className="form-control form-control-lg"
-              name="endDate"
-              value={endDate}
-              onChange={(e) => onInputChange(e)}
-            />
-          </div>
+          <br />
           <button className="btn btn-primary btn-block">Add Candidate</button>
         </form>
       </div>

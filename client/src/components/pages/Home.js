@@ -7,7 +7,8 @@ import Pagination from "../Pagination";
 const Home = () => {
   const [users, setUser] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(1);
+  const [postsPerPage] = useState(10);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     loadUsers();
@@ -26,7 +27,16 @@ const Home = () => {
   // get current users
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentUsers = users.slice(indexOfFirstPost, indexOfLastPost);
+  const currentUsers = users
+    .filter((val) => {
+      if (searchTerm == "") {
+        return val;
+      } else if (val.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+        return val;
+      }
+    })
+    .slice(indexOfFirstPost, indexOfLastPost);
+
   // change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -38,6 +48,16 @@ const Home = () => {
             <div>
               <h1>Employee List</h1>
             </div>
+            <form className="form-inline">
+              <input
+                className="form-control mr-sm-2"
+                type="search"
+                placeholder="Search"
+                onChange={(event) => {
+                  setSearchTerm(event.target.value);
+                }}
+              />
+            </form>
             <div>
               <Link className="btn btn-light btn-outline-dark" to="/users/add">
                 Add <FaPlus />
