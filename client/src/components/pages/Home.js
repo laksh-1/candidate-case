@@ -18,6 +18,7 @@ const Home = () => {
     const result = await axios.get("http://localhost:3004/users");
     // console.log(result.data);
     setUser(result.data);
+    // console.log(users);
   };
 
   const deleteUser = async (id) => {
@@ -77,7 +78,7 @@ const Home = () => {
             </thead>
             <tbody>
               {currentUsers.map((user, index) => (
-                <tr key={user.name}>
+                <tr key={user.id}>
                   <th scope="row">{index + 1}</th>
                   <td>{user.name}</td>
                   <td>{user.location}</td>

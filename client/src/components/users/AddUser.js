@@ -35,8 +35,8 @@ const AddUser = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(JSON.stringify(formFields));
-    await axios.post("http://localhost:3004/users", user);
-    await axios.post("http://localhost:3004/company", formFields);
+    await axios.post("http://localhost:3004/users", { user, formFields });
+    // await axios.post("http://localhost:3004/company", formFields);
 
     history.push("/");
   };
@@ -48,7 +48,8 @@ const AddUser = () => {
     data[index][event.target.name] = event.target.value;
     setFormFields(data);
   };
-  const addFields = () => {
+  const addFields = (e) => {
+    e.preventDefault();
     let object = {
       work: "",
       startDate: "",
@@ -185,41 +186,50 @@ const AddUser = () => {
           <div>
             {formFields.map((form, index) => {
               return (
-                <form>
-                  <div key={index}>
+                <form key={index}>
+                  <div>
                     <label className="form-control form-control-lg">
-                      Work Experience : (company name){" "}
+                      Work Experience :{" "}
                     </label>
                     <input
                       type="text"
                       name="work"
                       className="form-control form-control-lg"
+                      placeholder="company name"
                       onChange={(e) => handleFormChange(e, index)}
                       value={form.work}
                     />
                     <br />
-                    <label>Start date: </label>
-                    <input
-                      type="month"
-                      name="startDate"
-                      className="form-control form-control-lg"
-                      required
-                      onChange={(e) => handleFormChange(e, index)}
-                      value={form.startDate}
-                    />
+                    <div className="row">
+                      <div className="col-sm-6">
+                        <h4>Start date: </h4>
+                        <input
+                          type="month"
+                          name="startDate"
+                          className="form-control form-control-lg"
+                          required
+                          onChange={(e) => handleFormChange(e, index)}
+                          value={form.startDate}
+                        />
+                      </div>
+
+                      <br />
+                      <br />
+                      <div className="col-sm-6">
+                        <h4>End date: </h4>
+                        <input
+                          type="month"
+                          name="endDate"
+                          className="form-control form-control-lg"
+                          required
+                          onChange={(e) => handleFormChange(e, index)}
+                          value={form.endDate}
+                        />
+                      </div>
+                    </div>
                     <br />
-                    <br />
-                    <label>End date: </label>
-                    <input
-                      type="month"
-                      name="endDate"
-                      className="form-control form-control-lg"
-                      required
-                      onChange={(e) => handleFormChange(e, index)}
-                      value={form.endDate}
-                    />
-                    <br />
-                    <label>Profile: </label>
+
+                    <h4>Profile: </h4>
                     <input
                       type="text"
                       name="profile"
@@ -228,7 +238,11 @@ const AddUser = () => {
                       value={form.profile}
                     />
                     <br />
-                    <button type="button" onClick={() => removeFields(index)}>
+                    <button
+                      type="button"
+                      className="btn btn-danger "
+                      onClick={() => removeFields(index)}
+                    >
                       Remove
                     </button>
                     <br />
@@ -237,7 +251,9 @@ const AddUser = () => {
                 </form>
               );
             })}
-            <button onClick={addFields}>Add</button>
+            <button className="btn btn-success " onClick={(e) => addFields(e)}>
+              Add
+            </button>
             <br />
           </div>
           <br />

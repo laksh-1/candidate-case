@@ -167,49 +167,6 @@ const EditUser = () => {
               <option value="No">No</option>
             </select>
           </div>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="Enter Your last Company"
-              name="company"
-              value={company}
-              onChange={(e) => onInputChange(e)}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="Enter Your Profile for above"
-              name="profile"
-              value={profile}
-              onChange={(e) => onInputChange(e)}
-            />
-          </div>
-          <div className="form-group">
-            <label className="form-control form-control-lg">Start Date </label>
-            <br />
-            <input
-              type="month"
-              className="form-control form-control-lg"
-              placeholder="Academics"
-              name="startDate"
-              value={startDate}
-              onChange={(e) => onInputChange(e)}
-            />
-          </div>
-          <div className="form-group">
-            <label className="form-control form-control-lg">End Date </label>
-
-            <input
-              type="month"
-              className="form-control form-control-lg"
-              name="endDate"
-              value={endDate}
-              onChange={(e) => onInputChange(e)}
-            />
-          </div>
           <button className="btn btn-primary btn-block">
             Update Candidate
           </button>

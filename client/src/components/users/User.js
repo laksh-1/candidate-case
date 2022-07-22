@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { FaBackward } from "react-icons/fa";
 import axios from "axios";
 import { FaCloudDownloadAlt } from "react-icons/fa";
+import Discuss from "../Discuss";
 
 const User = () => {
   const [user, setUser] = useState({
@@ -20,6 +21,10 @@ const User = () => {
     endDate: "",
     profile: "",
     others: "",
+    company1: "",
+    profile1: "",
+    startDate1: "",
+    endDate1: "",
   });
   const { id } = useParams();
   useEffect(() => {
@@ -77,58 +82,65 @@ const User = () => {
     document.body.removeChild(element);
   };
   return (
-    <div className="container py-4">
-      <Link className="btn btn-primary" to="/">
-        <FaBackward />
-      </Link>
-      <FaCloudDownloadAlt
-        size="40px"
-        className="navbar-nav ml-auto"
-        onClick={() => download()}
-      />
-      <h1 className="display-4">User Id: {id}</h1>
-      <hr />
-      <ul className="list-group w-50">
-        <li className="list-group-item">
-          <b>Name:</b> {user.name}
-        </li>
-        <li className="list-group-item">
-          <b>Email:</b> {user.email}
-        </li>
-        <li className="list-group-item">
-          <b>Experience:</b> {user.experience}
-        </li>
-        <li className="list-group-item">
-          <b>Age:</b> {user.age}
-        </li>
-        <li className="list-group-item">
-          <b>Location:</b> {user.location}
-        </li>
-        <li className="list-group-item">
-          <b>LinkedIn Handle:</b> {user.handle}
-        </li>
-        <li className="list-group-item">
-          <b>Skills:</b> {user.others}
-        </li>
-        <li className="list-group-item">
-          <b>Academics:</b> {user.academics}
-        </li>
-        <li className="list-group-item">
-          <b>Offer In Hand:</b> {user.offerInHand}
-        </li>
-        <li className="list-group-item">
-          <b>Last Company:</b> {user.company}
-        </li>
-        <li className="list-group-item">
-          <b>Profile:</b> {user.profile}
-        </li>
-        <li className="list-group-item">
-          <b>Start Date:</b> {user.startDate}
-        </li>
-        <li className="list-group-item">
-          <b>End Date:</b> {user.endDate}
-        </li>
-      </ul>
+    <div className="container mt-6">
+      <div className="container py-4">
+        <Link className="btn btn-primary" to="/">
+          <FaBackward />
+        </Link>
+        <FaCloudDownloadAlt
+          size="40px"
+          className="navbar-nav ml-auto"
+          onClick={() => download()}
+        />
+        <h1 className="display-4">User Id: {id}</h1>
+        <hr />
+        <ul className="list-group w-50">
+          <li className="list-group-item">
+            <b>Name:</b> {user.name}
+          </li>
+          <li className="list-group-item">
+            <b>Email:</b> {user.email}
+          </li>
+          <li className="list-group-item">
+            <b>Experience:</b> {user.experience}
+          </li>
+          <li className="list-group-item">
+            <b>Age:</b> {user.age}
+          </li>
+          <li className="list-group-item">
+            <b>Location:</b> {user.location}
+          </li>
+          <li className="list-group-item">
+            <b>LinkedIn Handle:</b> {user.handle}
+          </li>
+          <li className="list-group-item">
+            <b>Skills:</b> {user.others}
+          </li>
+          <li className="list-group-item">
+            <b>Academics:</b> {user.academics}
+          </li>
+          <li className="list-group-item">
+            <b>Offer In Hand:</b> {user.offerInHand}
+          </li>
+          <li className="list-group-item">
+            <b>Last Company:</b>
+            {user.company1 ? user.company1 : "NOT SPECIFIED"}
+          </li>
+          <li className="list-group-item">
+            <b>Profile:</b> {user.profile1 ? user.profile1 : "NOT SPECIFIED"}
+          </li>
+          <li className="list-group-item">
+            <b>Start Date:</b>{" "}
+            {user.startDate1 ? user.startDate1 : "NOT SPECIFIED"}
+          </li>
+          <li className="list-group-item">
+            <b>End Date:</b> {user.cendDate1 ? user.endDate1 : "NOT SPECIFIED"}
+          </li>
+        </ul>
+      </div>
+      <h1 className="display-6">Comments</h1>
+      <br />
+      <Discuss id={id} />
     </div>
   );
 };
