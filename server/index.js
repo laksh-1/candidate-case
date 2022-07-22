@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
   res.send("server is running");
 });
 app.post("/users", (req, res) => {
+  const formFields = req.body.formFields;
   const name = req.body.name;
   const email = req.body.email;
   const experience = req.body.experience;
@@ -37,7 +38,9 @@ app.post("/users", (req, res) => {
   const age = req.body.age;
   const location = req.body.location;
   const salary = req.body.salary;
-
+  // console.log("hello", name);
+  // console.log("yash", formFields[0].work);
+  console.log(req.body);
   const sqlInsert =
     "INSERT INTO users (name,email,experience,others,academics,handle,offerInHand,company,profile,startDate,endDate,age,location,salary) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
   db.query(
@@ -60,15 +63,18 @@ app.post("/users", (req, res) => {
     ],
     (err, result) => {
       res.send(result);
-      console.log("yash", result);
+      // console.log("yash", result);
     }
   );
 });
-
+app.post("/company", (req, res) => {
+  const formFields = req.body.formFields;
+  console.log(req.body);
+});
 app.get("/users", (req, res) => {
   const sqlGet = "SELECT * FROM users;";
   db.query(sqlGet, (err, result) => {
-    console.log(result);
+    // console.log(result);
     res.send(result);
   });
 });
