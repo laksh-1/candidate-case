@@ -15,14 +15,16 @@ const Home = () => {
   }, []);
 
   const loadUsers = async () => {
-    const result = await axios.get("http://localhost:3004/users");
+    const result = await axios.get(
+      "https://candidate-dashboard.herokuapp.com/users"
+    );
     // console.log(result.data);
     setUser(result.data);
     // console.log(users);
   };
 
   const deleteUser = async (id) => {
-    await axios.delete(`http://localhost:3004/users/${id}`);
+    await axios.delete(`https://candidate-dashboard.herokuapp.com/users/${id}`);
     loadUsers();
   };
   // get current users

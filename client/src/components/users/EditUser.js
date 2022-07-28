@@ -48,12 +48,17 @@ const EditUser = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:3004/users/${id}`, user);
+    await axios.put(
+      `https://candidate-dashboard.herokuapp.com/users/${id}`,
+      user
+    );
     history.push("/");
   };
 
   const loadUser = async () => {
-    const result = await axios.get(`http://localhost:3004/users/${id}`);
+    const result = await axios.get(
+      `https://candidate-dashboard.herokuapp.com/users/${id}`
+    );
     setUser(result.data[0]);
     console.log(result);
   };

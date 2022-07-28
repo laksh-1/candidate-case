@@ -35,8 +35,11 @@ const AddUser = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(JSON.stringify(formFields));
-    await axios.post("http://localhost:3004/users", { user, formFields });
-    // await axios.post("http://localhost:3004/company", formFields);
+    await axios.post("https://candidate-dashboard.herokuapp.com/users", {
+      user,
+      formFields,
+    });
+    // await axios.post("https://candidate-dashboard.herokuapp.com/company", formFields);
 
     history.push("/");
   };

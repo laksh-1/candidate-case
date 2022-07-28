@@ -32,7 +32,9 @@ const User = () => {
   }, []);
   var text = "";
   const loadUser = async () => {
-    const res = await axios.get(`http://localhost:3004/users/${id}`);
+    const res = await axios.get(
+      `https://candidate-dashboard.herokuapp.com/users/${id}`
+    );
     console.log(res);
     setUser(res.data[0]);
   };
@@ -134,7 +136,7 @@ const User = () => {
             {user.startDate1 ? user.startDate1 : "NOT SPECIFIED"}
           </li>
           <li className="list-group-item">
-            <b>End Date:</b> {user.cendDate1 ? user.endDate1 : "NOT SPECIFIED"}
+            <b>End Date:</b> {user.endDate1 ? user.endDate1 : "NOT SPECIFIED"}
           </li>
         </ul>
       </div>

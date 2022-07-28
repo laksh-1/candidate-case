@@ -8,7 +8,9 @@ const Discuss = (id) => {
     loadUsers();
   }, []);
   const loadUsers = async () => {
-    const result = await axios.get(`http://localhost:3004/review/${myId}`);
+    const result = await axios.get(
+      `https://candidate-dashboard.herokuapp.com/review/${myId}`
+    );
     // console.log(result.data);
     setPosts(result.data);
   };
@@ -29,7 +31,10 @@ const Discuss = (id) => {
     // e.preventDefault();
     message.time = new Date().toLocaleString();
     // console.log(message);
-    await axios.post(`http://localhost:3004/review`, message);
+    await axios.post(
+      `https://candidate-dashboard.herokuapp.com/review`,
+      message
+    );
     loadUsers();
     setMessage({
       content: "",
